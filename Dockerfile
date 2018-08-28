@@ -16,4 +16,6 @@ RUN tar -xvzf dokuwiki-8a269cc015a64b40e4c918699f1e1142.tgz
 
 RUN rm dokuwiki-8a269cc015a64b40e4c918699f1e1142.tgz
 
+RUN service apache2 restart
+
 EXPOSE 8080
