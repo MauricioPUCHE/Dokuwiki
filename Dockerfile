@@ -10,12 +10,22 @@ RUN apt-get install -y  php-gd
 
 RUN apt install -y wget
 
+WORKDIR /var/www/html
+
 RUN wget https://download.dokuwiki.org/out/dokuwiki-8a269cc015a64b40e4c918699f1e1142.tgz
 
 RUN tar -xvzf dokuwiki-8a269cc015a64b40e4c918699f1e1142.tgz
 
 RUN rm dokuwiki-8a269cc015a64b40e4c918699f1e1142.tgz
 
-RUN service apache2 restart
+RUN mv ./dokuwiki/* .
 
-EXPOSE 8080
+RUN rm -R dokuwiki
+
+RUN rm /var/www/html/index.html
+
+RUN chown -R www-data:www-data /var/www/html
+
+EXPOSE 80
+
+CMD apache2ctl -D FOREGROUND
